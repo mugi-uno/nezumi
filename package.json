@@ -1,0 +1,46 @@
+{
+  "name": "nezumi",
+  "version": "1.0.0",
+  "scripts": {
+    "watch": "webpack -w --color --progress",
+    "build": "webpack",
+    "build:prod": "NODE_ENV='production' webpack -p"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "copy-webpack-plugin": "^4.1.0",
+    "eslint": "^4.6.1",
+    "eslint-config-semistandard": "^11.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "events": "^1.1.1",
+    "webpack": "^3.5.6"
+  },
+  "description": "Test code generator for Capybara/RSpec.",
+  "main": "index.js",
+  "author": "mugi-uno <mugi.uno@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "css-loader": "^0.28.7",
+    "css-mqpacker": "^6.0.1",
+    "element-xpath": "^0.0.4",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-loader": "^2.0.6",
+    "pug": "^2.0.0-rc.4",
+    "style-loader": "^0.18.2",
+    "vue": "^2.4.4",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "vuetify": "^0.15.7",
+    "vuex": "^2.4.0"
+  }
+}

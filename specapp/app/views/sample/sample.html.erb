@@ -1,0 +1,109 @@
+<%= form_for(@sample, url: '/sample') do |f| %>
+  <br />
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :age %>
+    <%= f.text_field :age %>
+  </div>
+  <div>
+  <%= f.label :textarea %>
+  <%= f.text_area :textarea %>
+  </div>
+  <div>
+    id form:<input type='text' id="idform" value='' />
+  </div>
+  <div>
+    class form:<input type='text' class="foo bar baz" value='' />
+  </div>
+  <div>
+    xpath form:<input type='text' value='' />
+  </div>
+
+  <hr />
+
+  <div>
+    <div>radio button with label</div>
+    <%= f.radio_button :food, 'a' %>
+    <%= f.label :food, 'Apple', value: 'a' %>
+    <%= f.radio_button :food, 'o' %>
+    <%= f.label :food, 'Orange', value: 'o' %>
+    <%= f.radio_button :food, 'p' %>
+    <%= f.label :food, 'Peach', value: 'p' %>
+  </div>
+
+  <div>
+    <input type='radio' value='1' id="radio1" />id-radio
+    <input type='radio' value='2' class="radio2" />class-radio
+    <input type='radio' value='3' />xpath-radio
+  </div>
+
+  <hr />
+
+  <div>
+    <div>checkbox with label</div>
+    <%= f.check_box :q1 %>
+    <%= f.label :q1, 'Question1' %>
+    <%= f.check_box :q2 %>
+    <%= f.label :q2, 'Question2' %>
+    <%= f.check_box :q3 %>
+    <%= f.label :q3, 'Question3' %>
+  </div>
+
+  <div>
+    <input type='checkbox' value='1' id="check1" />id-checkbox
+    <input type='checkbox' value='2' class="check2" />class-checkbox
+    <input type='checkbox' value='3' />xpath-checkbox
+  </div>
+
+  <hr />
+
+  <div>
+    <div>selectbox by form helper</div>
+    <%= f.label :drink %>
+    <%= f.select :drink, [["", ""], ["コーヒー", "coffee"], ["紅茶", "tea"], ["牛乳", "milk"]] %>
+  </div>
+
+  <div>
+    <select id="select1">
+      <option value=""></option>
+      <option value="coffee">コーヒー</option>
+      <option value="tea">紅茶</option>
+      <option value="milk">牛乳</option>
+    </select>id-select
+    <select class="select2">
+      <option value=""></option>
+      <option value="coffee">コーヒー</option>
+      <option value="tea">紅茶</option>
+      <option value="milk">牛乳</option>
+    </select>class-select
+    <select>
+      <option value=""></option>
+      <option value="coffee">コーヒー</option>
+      <option value="tea">紅茶</option>
+      <option value="milk">牛乳</option>
+    </select>xpath-select
+  </div>
+
+  <hr />
+
+  <div>
+    <a href='#'>sample button</a><br />
+    <a href='#' id='linkid'>duplicate link</a>(id)<br />
+    <a href='#' class='linkclass'>duplicate link</a>(class)<br />
+    <a href='#' >duplicate link</a>(xpath)<br />
+  </div>
+
+  <div>
+    <button type='button'>sample button</button><br />
+    <button type='button' id='buttonid'>duplicate button</button>(id)<br />
+    <button type='button' class='buttonclass'>duplicate button</button>(class)<br />
+    <button type='button'>duplicate button</button>(xpath)<br />
+  </div>
+
+  <hr />
+
+  <%= f.submit "Create my account" , class: "btn btn-large btn-primary" %>
+<% end %>
