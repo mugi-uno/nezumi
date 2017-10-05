@@ -3,23 +3,16 @@
   control(
     :watching='this.$store.state.panel.watching'
   )
-  code-list(
-    :code='code'
-  )
+  event-area(:eventGroups='this.$store.state.panel.eventGroups')
 </template>
 
 <script>
 import Control from './Control';
-import CodeList from './CodeList';
+import EventArea from './EventArea';
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
-  components: { Control, CodeList },
-  computed: {
-    code() {
-      return this.$store.state.panel.events.map(e => e.code);
-    },
-  }
+  components: { Control, EventArea },
 }
 </script>

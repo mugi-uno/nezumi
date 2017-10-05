@@ -37,6 +37,7 @@
     "postcss-loader": "^2.0.6",
     "pug": "^2.0.0-rc.4",
     "style-loader": "^0.18.2",
+    "uuid": "^3.1.0",
     "vue": "^2.4.4",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
