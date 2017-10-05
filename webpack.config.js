@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -15,7 +16,7 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, outputDir),
   },
-  devtool: 'source-map',
+  devtool: !isProduction ? 'source-map' : false,
   externals: [
     'chrome',
   ],
@@ -55,5 +56,19 @@ module.exports = {
       { from: 'lib/icon48.png', to: outputDir },
       { from: 'lib/icon128.png', to: outputDir },
     ]),
-  ],
+  ].concat(
+    isProduction
+      ? [
+        new webpack.optimize.UglifyJsPlugin({
+          comments: false,
+          compress: {
+            warnings: false,
+            drop_console: true,
+          },
+          sourceMap: false,
+          beautify: false,
+        }),
+      ]
+      : []
+  ),
 };
