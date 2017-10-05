@@ -1,9 +1,7 @@
 <template lang="pug">
-.code
-  .code-body(
-    ref='code'
-    v-html='codeHtml'
-  )
+.event-area
+  .event-area-body(ref='area')
+    event-group(v-for='eg in eventGroups' :key='eg.key' :event-group='eg')
   v-btn.copy-button(
     small outline
     :loading="copying"
@@ -16,25 +14,21 @@
 </template>
 
 <script>
-import _ from 'lodash';
+import EventGroup from './EventGroup';
 
 export default {
-  name: 'CodeList',
-  props: ['code'],
+  name: 'EventArea',
+  props: ['eventGroups'],
+  components: { EventGroup },
   data() {
     return {
       copying: false,
     };
   },
-  computed: {
-    codeHtml() {
-      return _.join(this.code, '\n');
-    }
-  },
   methods: {
     copy() {
       const range = document.createRange();
-      range.selectNodeContents(this.$refs.code);
+      range.selectNodeContents(this.$refs.area);
 
       const selection = document.getSelection();
       selection.removeAllRanges();
@@ -54,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.code {
+.event-area {
   position: relative;
   min-height: 100px;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
