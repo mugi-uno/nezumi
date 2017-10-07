@@ -1,16 +1,17 @@
 <template lang="pug">
 .event-area
   .event-area-body(ref='area')
-    event-group(v-for='eg in eventGroups' :key='eg.key' :event-group='eg')
+    event-group(v-for='eg in eventGroups' :key='eg.key' :event-group='eg') 
   v-btn.copy-button(
-    small outline
+    flat icon
     :loading="copying"
     :disabled="copying"
     :class='{ "indigo--text": copying }'
     @click.native='copy'
   )
-    | copy
-    span(slot='loader') COPIED!
+    v-icon content_copy
+    span.custom-loader(slot='loader')
+      v-icon check
 </template>
 
 <script>

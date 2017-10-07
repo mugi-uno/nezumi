@@ -1,15 +1,20 @@
 <template lang="pug">
 .control
   v-btn(
+    small
+    :ripple='false'
+    :class='[watching ? "red--text" : "grey--text", watching ? "red lighten-4" : ""]'
     @click.native='toggle'
-    :class='[watching ? "error" : "primary"]'
-    small
   )
-    | {{toggleButtonText}}
-  v-btn.warning(
+    v-icon
+      | fiber_manual_record
+    | REC
+  v-btn(
+    small
     @click.native='clear'
-    small
   )
+    v-icon
+      | clear
     | clear
 </template>
 
@@ -17,11 +22,6 @@
 export default {
   name: 'Control',
   props: ['watching'],
-  computed: {
-    toggleButtonText() {
-      return this.watching ? 'STOP' : 'START';
-    }
-  },
   methods: {
     toggle() {
       this.$store.dispatch('toggleWatching');
