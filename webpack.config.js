@@ -24,7 +24,19 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader',
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [require('postcss-cssnext')()],
+            },
+          },
+        ],
       },
       {
         test: /\.js$/,
@@ -48,13 +60,10 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'lib/manifest.json', to: outputDir },
-      { from: 'lib/devtools.html', to: outputDir },
-      { from: 'lib/panel.html', to: outputDir },
-      { from: 'lib/panel.css', to: outputDir },
-      { from: 'lib/icon16.png', to: outputDir },
-      { from: 'lib/icon48.png', to: outputDir },
-      { from: 'lib/icon128.png', to: outputDir },
+      { from: '*.json', to: outputDir, context: 'lib' },
+      { from: '*.html', to: outputDir, context: 'lib' },
+      { from: '*.png', to: outputDir, context: 'lib' },
+      { from: 'style/**', to: outputDir, context: 'lib' },
     ]),
   ].concat(
     isProduction

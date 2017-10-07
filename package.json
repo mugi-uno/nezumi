@@ -41,7 +41,7 @@
     "vue": "^2.4.4",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
-    "vuetify": "^0.15.7",
+    "vuetify": "^0.16.3",
     "vuex": "^2.4.0"
   }
 }
