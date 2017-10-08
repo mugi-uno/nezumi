@@ -15,29 +15,46 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import EventGroup from './EventGroup';
 
 export default {
   name: 'EventArea',
   props: ['eventGroups'],
   components: { EventGroup },
+
   data() {
     return {
       copying: false,
     };
   },
+
+  watch: {
+    eventGroups(newVal, oldVal) {
+      if (newVal.length !== oldVal.length) return;
+
+      const area = this.$refs.area;
+      area.scrollTop = area.scrollHeight - area.offsetHeight;
+    },
+  },
+
   methods: {
     copy() {
-      const range = document.createRange();
-      range.selectNodeContents(this.$refs.area);
+      const dummy = document.createElement("textarea");
+      dummy.style.cssText = "position:absolute; top: -100%; left:-100%";
+      
+      const events = _.flattenDeep(
+        this.eventGroups.map(eg => eg.open ? eg.events : eg.events.filter(e => e.show)
+      ));
 
-      const selection = document.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+      dummy.value = _.join(events.map(e => e.code), "\n");
+
+      document.body.appendChild(dummy);
+
+      dummy.select();
 
       document.execCommand('copy');
-
-      selection.removeAllRanges();
+      document.body.removeChild(dummy);
 
       this.copying = true;
       setTimeout(() => {
@@ -58,8 +75,11 @@ export default {
   color: #333;
   line-height: 16px;
   padding: 10px;
-  box-shadow: 0px 1px 3px #ccc;
-  border-radius: 2px;
+}
+
+.event-area-body {
+  height: calc(100vh - 55px);
+  overflow-y: scroll;
 }
 
 .copy-button {

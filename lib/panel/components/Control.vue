@@ -5,7 +5,7 @@
     :ripple='false'
     :class='[watching ? "red--text" : "grey--text", watching ? "red lighten-4" : ""]'
     @click.native='toggle'
-  )
+  ) 
     v-icon
       | fiber_manual_record
     | REC
@@ -32,3 +32,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.control {
+  height: 35px;
+}
+</style>
