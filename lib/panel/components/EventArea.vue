@@ -21,11 +21,22 @@ export default {
   name: 'EventArea',
   props: ['eventGroups'],
   components: { EventGroup },
+
   data() {
     return {
       copying: false,
     };
   },
+
+  watch: {
+    eventGroups(newVal, oldVal) {
+      if (newVal.length !== oldVal.length) return;
+
+      const area = this.$refs.area;
+      area.scrollTop = area.scrollHeight - area.offsetHeight;
+    },
+  },
+
   methods: {
     copy() {
       const range = document.createRange();
@@ -58,8 +69,11 @@ export default {
   color: #333;
   line-height: 16px;
   padding: 10px;
-  box-shadow: 0px 1px 3px #ccc;
-  border-radius: 2px;
+}
+
+.event-area-body {
+  height: calc(100vh - 55px);
+  overflow-y: scroll;
 }
 
 .copy-button {
