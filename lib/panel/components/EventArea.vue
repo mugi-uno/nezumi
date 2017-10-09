@@ -16,6 +16,7 @@
 
 <script>
 import _ from 'lodash';
+import copyText from '../utils//copyText';
 import EventGroup from './EventGroup';
 
 export default {
@@ -40,21 +41,13 @@ export default {
 
   methods: {
     copy() {
-      const dummy = document.createElement("textarea");
-      dummy.style.cssText = "position:absolute; top: -100%; left:-100%";
-      
       const events = _.flattenDeep(
         this.eventGroups.map(eg => eg.open ? eg.events : eg.events.filter(e => e.show)
       ));
 
-      dummy.value = _.join(events.map(e => e.code), "\n");
+      const text = _.join(events.map(e => e.code), "\n");
 
-      document.body.appendChild(dummy);
-
-      dummy.select();
-
-      document.execCommand('copy');
-      document.body.removeChild(dummy);
+      if (!copyText(text)) return;
 
       this.copying = true;
       setTimeout(() => {
