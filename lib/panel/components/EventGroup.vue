@@ -51,12 +51,12 @@ export default {
   border-radius: 2px;
   margin: 5px;
   padding: 5px;
-  overflow-x: scroll;
 }
 
 .event-items {
   display: flex;
   flex-direction: column;
+  width: calc(100% - 25px);
 }
 </style>
 
