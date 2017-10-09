@@ -4,7 +4,8 @@
   "scripts": {
     "watch": "webpack -w --color --progress",
     "build": "webpack",
-    "build:prod": "NODE_ENV='production' webpack"
+    "build:prod": "NODE_ENV='production' webpack",
+    "build:release": "yarn build:prod && rm -f dist/dist.zip && cd dist && zip -r dist.zip ./*"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
