@@ -1,33 +1,64 @@
 <template lang="pug">
 .control
-  v-btn(
-    small
-    :ripple='false'
-    :class='[watching ? "red--text" : "grey--text", watching ? "red lighten-4" : ""]'
-    @click.native='toggle'
-  ) 
-    v-icon
-      | fiber_manual_record
-    | REC
-  v-btn(
-    small
-    @click.native='clear'
-  )
-    v-icon
+  .left-control
+    v-btn(
+      small
+      :ripple='false'
+      :class='[watching ? "red--text" : "grey--text", watching ? "red lighten-4" : ""]'
+      @click.native='toggle'
+    ) 
+      v-icon
+        | fiber_manual_record
+      | REC
+    v-btn(
+      small
+      @click.native='clear'
+    )
+      v-icon
+        | clear
       | clear
-    | clear
+  .right-control
+    v-btn.copy-button(
+      small
+      :loading="copying"
+      :disabled="copying"
+      :class='[copying ? "indigo--text" : "grey--text" ]'
+      @click.native='copy'
+    )
+      v-icon content_copy
+      | COPY ALL
+      span.custom-loader(slot='loader')
+        v-icon check
+        | COPIED!!
 </template>
 
 <script>
+import copyText from '../utils//copyText';
+
 export default {
   name: 'Control',
-  props: ['watching'],
+  props: ['watching', 'allText'],
+
+  data() {
+    return {
+      copying: false,
+    };
+  },
+
   methods: {
     toggle() {
       this.$store.dispatch('toggleWatching');
     },
     clear() {
       this.$store.dispatch('clearPanel');
+    },
+    copy() {
+      if (!copyText(this.allText)) return;
+
+      this.copying = true;
+      setTimeout(() => {
+        this.copying = false;
+      }, 1000);
     },
   },
 }
@@ -36,5 +67,7 @@ export default {
 <style scoped>
 .control {
   height: 35px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
