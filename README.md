@@ -21,6 +21,9 @@ https://chrome.google.com/webstore/detail/nezumi/jphlnepdpbnjmjlnbbcfmcnngnaagpm
 - click
   - link(anchor)
   - button
+  - and any element
+- assertion
+  - have_content (on text selection)
 
 # Licence
 
