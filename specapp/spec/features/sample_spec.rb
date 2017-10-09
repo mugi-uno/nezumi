@@ -46,6 +46,7 @@ RSpec.describe 'Sample' do
       click_button 'buttonid'
       find('.buttonclass').click
       find(:xpath, 'id("new_sample")/div[14]/button[4]').click
+
       find('.btn.btn-large.btn-primary').click
     end
   end
