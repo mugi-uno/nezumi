@@ -1,13 +1,10 @@
 <template lang="pug">
 .event-group-control
-  template(v-if='expandable')
-    v-btn(
-      flat icon :color='toggleButtonColor'
-      @click.native='toggle'
-    )
-      v-icon {{toggleIcon}}
-  template(v-else)
-    v-icon.default-icon(color='grey lighten-2') check
+  v-btn.control-button(
+    flat icon :color='toggleButtonColor'
+    @click.native='toggle'
+  )
+    v-icon {{toggleIcon}}
 </template>
 
 <script>
@@ -34,16 +31,16 @@ export default {
 </script>
 
 <style scoped>
-.event-group-control button {
+.control-button {
   margin: 0px 5px 0px 0px;
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
 }
 
 .default-icon {
   margin: 0px 5px 0px 0px;
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   font-size: 14px;
 }
 </style>
