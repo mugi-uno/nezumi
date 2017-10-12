@@ -1,75 +1,78 @@
 <template lang="pug">
 .event
-  .event-code
-    | {{event.code}}
-  v-btn.copy-button(
-    flat icon 
-    :loading="copying"
-    :disabled="copying"
-    :color='copyButtonColor'
-    @click.native='copy'
+  span.event-kind(
+    v-if='detail'
+    :class='kindClass'
   )
-    v-icon content_copy
-    span.custom-loader(slot='loader')
-      v-icon check
+    | {{kindText}}
+  .event-code(:class='[{ "detail" : detail }, { "hidden" : hidden }]')
+    event-code(:code='code')
 </template>
 
 <script>
-import copyText from '../utils/copyText';
+import EventCode from './EventCode';
 
 export default {
   name: 'Event',
-  props: ['event'],
-
-  data() {
-    return {
-      copying: false,
-    };
-  },
-
+  props: ['kind', 'code', 'detail', 'hidden'],
+  components: { EventCode },
   computed: {
-    copyButtonColor() {
-      return this.copying ? 'indigo' : 'grey';
+    kindText() {
+      const values = {
+        'klass': 'class',
+      };
+
+      return values[this.kind] || this.kind;
+    },
+    kindClass() {
+      return `kind-${this.kind}`;
     },
   },
-
-  methods: {
-    copy() {
-      if (!copyText(this.event.code)) return;
-
-      this.copying = true;
-      setTimeout(() => {
-        this.copying = false;
-      }, 1000);
-    },
-  }
 }
 </script>
 
 <style scoped>
 .event {
-  position: relative;
+  display: flex;
   width: 100%;
-  padding-right: 25px;
+}
+
+.event-kind {
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  color: hsla(0, 0%, 60%, 1);
+  font-weight: bold;
+  margin: 4px 0px 4px 0px;
+  text-align: center;
+  width: 60px;
+  flex-shrink: 0;
+
+  &.kind-id {
+    color: hsla(0, 84%, 60%, 1);;
+  }
+  &.kind-klass {
+    color: hsla(217, 106%, 47%, 1);;
+  }
+  &.kind-label {
+    color:hsla(162, 33%, 55%, 1);
+  }
+  &.kind-matcher {
+    color: hsl(311, 54%, 60%);
+  }
 }
 
 .event-code {
   width: 100%;
-  overflow-x: scroll;
-  &::-webkit-scrollbar {
-    display: none;
+
+  &.hidden {
+    color: grey;
   }
-}
 
-.copy-button {
-  position: absolute;
-  right: -10px;
-  top: -12px;
-  height: 25px;
-  width: 25px;
-
-  & i {
-    font-size: 14px;
+  &.detail {
+    margin-left: 5px;
+    width: calc(100% - 65px);
+    color: grey;
   }
 }
 </style>

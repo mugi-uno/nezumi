@@ -1,16 +1,27 @@
 <template lang="pug">
 .event-group
   event-group-control(
-    :size='events.length'
-    :open='eventGroup.open'
+    :size='event.capybara.length'
+    :open='event.open'
     @toggle='toggle'
   )
   .event-items
-    event-item(
-      v-for='e in showEvents'
-      :key='e.key'
-      :event='e'
+    .event-item
+      event-item(
+        :code='event.capybara[0].code'
+        :kind='event.capybara[0].kind'
+        :hidden='event.hidden'
+      )
+    .event-all-item.event-item(
+      v-show='event.open'
     )
+      event-item(
+        v-for='capybara in event.capybara'
+        :key='capybara.key'
+        :kind='capybara.kind'
+        :code='capybara.code'
+        :detail='true'
+      )
 </template>
 
 <script>
@@ -19,25 +30,12 @@ import EventItem from './EventItem';
 
 export default {
   name: 'EventGroup',
-  props: ['eventGroup'],
+  props: ['event'],
   components: { EventGroupControl, EventItem },
-  computed: {
-    events() {
-      return this.eventGroup.events;
-    },
-
-    showEvents() {
-      if (this.eventGroup.open) {
-        return this.events;
-      }
-
-      return this.events.filter(e => e.show);
-    },
-  },
 
   methods: {
     toggle() {
-      this.$store.dispatch('toggleEventGroup', this.eventGroup.key);
+      this.$store.dispatch('toggleEvent', this.event.key);
     },
   },
 }
@@ -50,13 +48,17 @@ export default {
   box-shadow: -1px 1px 1px #ddd;
   border-radius: 2px;
   margin: 5px;
-  padding: 5px;
 }
 
 .event-items {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 25px);
+  width: calc(100% - 30px);
+}
+
+.event-item {
+  display: flex;
+  flex-direction: column;
 }
 </style>
 

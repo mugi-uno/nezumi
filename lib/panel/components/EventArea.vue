@@ -1,7 +1,7 @@
 <template lang="pug">
 .event-area
   .event-area-body(ref='area')
-    event-group(v-for='eg in eventGroups' :key='eg.key' :event-group='eg')
+    event-group(v-for='event in events' :key='event.key' :event='event')
 </template>
 
 <script>
@@ -9,10 +9,10 @@ import EventGroup from './EventGroup';
 
 export default {
   name: 'EventArea',
-  props: ['eventGroups'],
+  props: ['events'],
   components: { EventGroup },
   watch: {
-    eventGroups(newVal, oldVal) {
+    events(newVal, oldVal) {
       if (newVal.length !== oldVal.length) return;
 
       const area = this.$refs.area;

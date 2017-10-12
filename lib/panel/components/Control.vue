@@ -18,11 +18,18 @@
         | clear
       | clear
   .right-control
+    .check
+      v-checkbox(
+        label='SHOW ALL'
+        :input-value='showHidden'
+        @change='toggleHidden'
+        hide-details
+      )
     v-btn.copy-button(
       small
       :loading="copying"
       :disabled="copying"
-      :class='[copying ? "indigo--text" : "grey--text" ]'
+      :class='[copying ? "indigo--text" : "" ]'
       @click.native='copy'
     )
       v-icon content_copy
@@ -37,7 +44,7 @@ import copyText from '../utils//copyText';
 
 export default {
   name: 'Control',
-  props: ['watching', 'allText'],
+  props: ['watching', 'allText', 'showHidden'],
 
   data() {
     return {
@@ -48,6 +55,9 @@ export default {
   methods: {
     toggle() {
       this.$store.dispatch('toggleWatching');
+    },
+    toggleHidden() {
+      this.$store.dispatch('toggleHidden');
     },
     clear() {
       this.$store.dispatch('clearPanel');
@@ -69,5 +79,14 @@ export default {
   height: 35px;
   display: flex;
   justify-content: space-between;
+}
+
+.right-control {
+  display: flex;
+  align-items: center;
+}
+
+.check {
+  width: 130px;
 }
 </style>

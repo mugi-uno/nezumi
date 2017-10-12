@@ -1,10 +1,12 @@
 <template lang="pug">
-.app
-  control(
-    :watching='this.$store.state.panel.watching'
-    :allText='allText'
-  )
-  event-area(:eventGroups='eventGroups')
+v-app(light)
+  .app
+    control(
+      :watching='this.$store.state.panel.watching'
+      :allText='allText'
+      :showHidden='showHidden'
+    )
+    event-area(:events='events')
 </template>
 
 <script>
@@ -17,15 +19,17 @@ export default {
   name: 'App',
   components: { Control, EventArea },
   computed: {
-    eventGroups() {
-      return this.$store.state.panel.eventGroups;
+    events() {
+      if (this.$store.state.panel.showHidden) {
+        return this.$store.state.panel.events;
+      }
+      return this.$store.state.panel.events.filter(e => !e.hidden);
     },
     allText() {
-      const events = _.flattenDeep(
-        this.eventGroups.map(eg => eg.open ? eg.events : eg.events.filter(e => e.show)
-      ));
-
-      return _.join(events.map(e => e.code), "\n");
+      return _.join(this.events.map(e => e.capybara[0].code), "\n");
+    },
+    showHidden() {
+      return this.$store.state.panel.showHidden;
     },
   },
 }
