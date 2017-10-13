@@ -60,6 +60,10 @@ export default {
   &.kind-matcher {
     color: hsl(311, 54%, 60%);
   }
+  &.kind-navi {
+    color: #fff;
+    background-color: hsl(225, 100%, 72%);
+  }
 }
 
 .event-code {
