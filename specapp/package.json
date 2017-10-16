@@ -1,5 +1,7 @@
 {
   "name": "specapp",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery-xpath": "^0.3.1"
+  }
 }
