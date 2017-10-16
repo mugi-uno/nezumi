@@ -4,7 +4,9 @@
   "plugins": ["import"],
   "globals": {
     "chrome": false,
-    "document": false
+    "document": false,
+    "XPathEvaluator": false,
+    "XPathResult": false
   },
   "rules": {
     "comma-dangle": ["error", "always-multiline"],

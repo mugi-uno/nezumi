@@ -24,6 +24,16 @@
 
   <hr />
 
+  <div>Nested fields</div>
+  <div id="parent">
+    <input type='text' class="foo" value='' /><span> : has unique parent</span>
+  </div>
+  <div>
+    <input type='text' class="foo" value='' /><span> : not has unique parent</span>
+  </div>
+
+  <hr />
+
   <div>
     <div>radio button with label</div>
     <%= f.radio_button :food, 'a' %>
